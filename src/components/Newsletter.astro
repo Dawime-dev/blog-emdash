@@ -25,7 +25,7 @@
           et des ressources exclusives sur EmDash, directement dans votre boite mail.
         </p>
 
-        <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" action="#" method="post">
+        <form class="newsletter-form flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
           <input
             type="email"
             name="email"
@@ -40,7 +40,7 @@
             S'inscrire
           </button>
         </form>
-
+        <p class="newsletter-msg text-sm mt-4 hidden"></p>
         <p class="text-xs text-text-muted/60 mt-4">
           Pas de spam. Desabonnement en un clic.
         </p>
@@ -48,3 +48,38 @@
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll('.newsletter-form').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = e.currentTarget as HTMLFormElement;
+      const msg = f.parentElement?.querySelector('.newsletter-msg') as HTMLElement;
+      const email = new FormData(f).get('email') as string;
+      const btn = f.querySelector('button') as HTMLButtonElement;
+
+      btn.disabled = true;
+      btn.textContent = '...';
+
+      try {
+        const res = await fetch('/api/newsletter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await res.json();
+        msg.textContent = data.message || data.error;
+        msg.className = `newsletter-msg text-sm mt-4 ${res.ok ? 'text-accent-green' : 'text-red-400'}`;
+        msg.classList.remove('hidden');
+        if (res.ok) f.reset();
+      } catch {
+        msg.textContent = 'Erreur de connexion. Reessayez.';
+        msg.className = 'newsletter-msg text-sm mt-4 text-red-400';
+        msg.classList.remove('hidden');
+      }
+
+      btn.disabled = false;
+      btn.textContent = "S'inscrire";
+    });
+  });
+</script>
