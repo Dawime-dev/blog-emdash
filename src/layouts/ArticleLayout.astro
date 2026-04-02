@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro'
+import Breadcrumbs from '../components/Breadcrumbs.astro'
 
 interface Props {
   title: string
@@ -31,10 +32,46 @@ const difficultyLabels: Record<string, string> = {
   intermediaire: 'Intermediaire',
   avance: 'Avance',
 }
+
+const sectionMap: Record<string, string> = {
+  installation: 'tutoriels', contenu: 'tutoriels', deploiement: 'tutoriels',
+  themes: 'tutoriels', plugins: 'tutoriels', migration: 'tutoriels',
+  securite: 'tutoriels', api: 'tutoriels',
+  architecture: 'guides', comparaison: 'guides', outils: 'guides', ia: 'guides',
+  actualite: 'articles', opinion: 'articles', fonctionnalite: 'articles', communaute: 'articles',
+  infrastructure: 'dossiers', production: 'dossiers',
+}
+const section = sectionMap[category.toLowerCase()] || category.toLowerCase()
+const sectionLabels: Record<string, string> = {
+  tutoriels: 'Tutoriels', guides: 'Guides', articles: 'Articles',
+  themes: 'Themes', plugins: 'Plugins', dossiers: 'Dossiers',
+}
+const sectionLabel = sectionLabels[section] || category
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  author: { '@type': 'Person', name: author },
+  datePublished: date.toISOString(),
+  publisher: { '@type': 'Organization', name: 'EmDash FR', url: 'https://blog-emdash.fr' },
+  keywords: tags.join(', '),
+}
 ---
 
 <BaseLayout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumbs -->
+    <div class="max-w-4xl mx-auto">
+      <Breadcrumbs items={[
+        { label: 'Accueil', href: '/' },
+        { label: sectionLabel, href: `/${section}` },
+        { label: title },
+      ]} />
+    </div>
+
     <!-- Hero -->
     <header class="max-w-4xl mx-auto mb-12">
       <div class="flex flex-wrap items-center gap-3 mb-4 text-sm">
