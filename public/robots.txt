@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /_astro/
 
-Sitemap: https://blog-emdash.fr/sitemap-index.xml
+Sitemap: https://emdash.fr/sitemap-index.xml
