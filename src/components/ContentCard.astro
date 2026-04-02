@@ -1,0 +1,95 @@
+---
+interface Props {
+  title: string
+  description: string
+  href: string
+  date: Date
+  category: string
+  tags: string[]
+  difficulty?: 'debutant' | 'intermediaire' | 'avance'
+  duration?: string
+  type: 'tutoriel' | 'guide' | 'article' | 'theme' | 'plugin' | 'dossier'
+}
+
+const { title, description, href, date, category, tags, difficulty, duration, type } = Astro.props
+
+const formattedDate = new Intl.DateTimeFormat('fr-FR', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+}).format(date)
+
+const typeConfig: Record<string, { label: string; color: string }> = {
+  tutoriel: { label: 'Tutoriel', color: 'bg-emdash/15 text-emdash' },
+  guide: { label: 'Guide', color: 'bg-accent/15 text-accent' },
+  article: { label: 'Article', color: 'bg-purple-500/15 text-purple-400' },
+  theme: { label: 'Theme', color: 'bg-pink-500/15 text-pink-400' },
+  plugin: { label: 'Plugin', color: 'bg-accent-green/15 text-accent-green' },
+  dossier: { label: 'Dossier', color: 'bg-yellow-500/15 text-yellow-400' },
+}
+
+const difficultyConfig: Record<string, { label: string; color: string }> = {
+  debutant: { label: 'Debutant', color: 'bg-accent-green/15 text-accent-green' },
+  intermediaire: { label: 'Intermediaire', color: 'bg-emdash/15 text-emdash' },
+  avance: { label: 'Avance', color: 'bg-red-500/15 text-red-400' },
+}
+
+const badge = typeConfig[type]
+const diffBadge = difficulty ? difficultyConfig[difficulty] : null
+---
+
+<a
+  href={href}
+  class="group block bg-surface-light rounded-xl border border-surface-lighter hover:border-emdash/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-emdash/5 overflow-hidden"
+>
+  <div class="p-5">
+    <!-- Badges row -->
+    <div class="flex flex-wrap items-center gap-2 mb-3">
+      <span class={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${badge.color}`}>
+        {badge.label}
+      </span>
+      {diffBadge && (
+        <span class={`text-xs font-medium px-2.5 py-0.5 rounded-full ${diffBadge.color}`}>
+          {diffBadge.label}
+        </span>
+      )}
+      {duration && (
+        <span class="text-xs text-text-muted flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          {duration}
+        </span>
+      )}
+    </div>
+
+    <!-- Title -->
+    <h3 class="text-lg font-bold text-text group-hover:text-emdash transition-colors mb-2 line-clamp-2">
+      {title}
+    </h3>
+
+    <!-- Description -->
+    <p class="text-sm text-text-muted mb-4 line-clamp-3">
+      {description}
+    </p>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between">
+      <time class="text-xs text-text-muted" datetime={date.toISOString()}>
+        {formattedDate}
+      </time>
+      {tags.length > 0 && (
+        <div class="flex gap-1.5">
+          {tags.slice(0, 2).map((tag) => (
+            <span class="text-xs bg-surface-lighter/60 text-text-muted px-2 py-0.5 rounded-full">
+              {tag}
+            </span>
+          ))}
+          {tags.length > 2 && (
+            <span class="text-xs text-text-muted">+{tags.length - 2}</span>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</a>

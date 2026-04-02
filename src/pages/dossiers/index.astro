@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContentCard from '../../components/ContentCard.astro';
+
+const items = await getCollection('dossiers');
+const sorted = items.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<BaseLayout
+  title="Dossiers EmDash"
+  description="Dossiers complets et approfondis sur les sujets cles de l'ecosysteme EmDash."
+>
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Page header -->
+      <div class="max-w-3xl mb-12">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-text mb-4">
+          Dossiers
+        </h1>
+        <p class="text-lg text-text-muted leading-relaxed">
+          Des dossiers complets pour approfondir les sujets strategiques autour d'EmDash : migrations, mise en production, ecosysteme Cloudflare et plus encore.
+        </p>
+      </div>
+
+      <!-- Dossiers grid -->
+      {sorted.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {sorted.map((item) => (
+            <ContentCard
+              title={item.data.title}
+              description={item.data.description}
+              href={`/dossiers/${item.id}`}
+              date={new Date(item.data.date)}
+              category={item.data.category}
+              tags={item.data.tags}
+              type="dossier"
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16 bg-surface-light/50 rounded-xl border border-surface-lighter/50">
+          <p class="text-text-muted">Aucun dossier pour le moment. Revenez bientot !</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

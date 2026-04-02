@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import CategorySection from '../components/CategorySection.astro';
+import Newsletter from '../components/Newsletter.astro';
+
+const tutoriels = await getCollection('tutoriels');
+const guides = await getCollection('guides');
+const articles = await getCollection('articles');
+const themes = await getCollection('themes');
+const plugins = await getCollection('plugins');
+const dossiers = await getCollection('dossiers');
+
+const sortByDate = (a: any, b: any) =>
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+
+const toContentItems = (items: any[], type: string, basePath: string) =>
+  items.sort(sortByDate).slice(0, 3).map((item) => ({
+    title: item.data.title,
+    description: item.data.description,
+    href: `/${basePath}/${item.id}`,
+    date: new Date(item.data.date),
+    category: item.data.category ?? type,
+    tags: item.data.tags,
+    difficulty: item.data.difficulty,
+    duration: item.data.duration,
+    type: type as 'tutoriel' | 'guide' | 'article' | 'theme' | 'plugin' | 'dossier',
+  }));
+---
+
+<BaseLayout
+  title="Accueil"
+  description="La communaute francophone EmDash : tutoriels, guides, articles et ressources pour maitriser le CMS open-source de Cloudflare."
+>
+  <Hero />
+  <FeatureGrid />
+
+  <CategorySection
+    title="Tutoriels"
+    description="Apprenez EmDash pas a pas avec nos tutoriels pratiques."
+    href="/tutoriels"
+    items={toContentItems(tutoriels, 'tutoriel', 'tutoriels')}
+  />
+
+  <CategorySection
+    title="Guides"
+    description="Guides approfondis pour comprendre l'architecture et les concepts d'EmDash."
+    href="/guides"
+    items={toContentItems(guides, 'guide', 'guides')}
+  />
+
+  <CategorySection
+    title="Articles"
+    description="Actualites, analyses et reflexions sur EmDash et son ecosysteme."
+    href="/articles"
+    items={toContentItems(articles, 'article', 'articles')}
+  />
+
+  <CategorySection
+    title="Themes"
+    description="Tests et comparatifs des themes disponibles pour EmDash."
+    href="/themes"
+    items={toContentItems(themes, 'theme', 'themes')}
+  />
+
+  <CategorySection
+    title="Plugins"
+    description="Decouvrez et evaluez les plugins de l'ecosysteme EmDash."
+    href="/plugins"
+    items={toContentItems(plugins, 'plugin', 'plugins')}
+  />
+
+  <CategorySection
+    title="Dossiers"
+    description="Dossiers complets pour approfondir les sujets cles autour d'EmDash."
+    href="/dossiers"
+    items={toContentItems(dossiers, 'dossier', 'dossiers')}
+  />
+
+  <Newsletter />
+</BaseLayout>

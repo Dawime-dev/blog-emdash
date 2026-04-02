@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContentCard from '../../components/ContentCard.astro';
+
+const items = await getCollection('tutoriels');
+const sorted = items.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const difficulties = ['Tous', 'Debutant', 'Intermediaire', 'Avance'] as const;
+---
+
+<BaseLayout
+  title="Tutoriels EmDash"
+  description="Apprenez EmDash pas a pas : installation, configuration, creation de themes, plugins et bien plus."
+>
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Page header -->
+      <div class="max-w-3xl mb-12">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-text mb-4">
+          Tutoriels
+        </h1>
+        <p class="text-lg text-text-muted leading-relaxed">
+          Des tutoriels pratiques pour apprendre EmDash etape par etape, du niveau debutant au niveau avance. Chaque tutoriel inclut des exemples de code et des explications detaillees.
+        </p>
+      </div>
+
+      <!-- Difficulty filter tabs -->
+      <div class="flex flex-wrap gap-2 mb-10">
+        {difficulties.map((level, i) => (
+          <button
+            data-filter={level.toLowerCase()}
+            class:list={[
+              'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border',
+              i === 0
+                ? 'bg-emdash text-white border-emdash'
+                : 'bg-surface-light text-text-muted border-surface-lighter hover:border-emdash/40 hover:text-text',
+            ]}
+          >
+            {level}
+          </button>
+        ))}
+      </div>
+
+      <!-- Grid -->
+      {sorted.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {sorted.map((item) => (
+            <div data-difficulty={item.data.difficulty}>
+              <ContentCard
+                title={item.data.title}
+                description={item.data.description}
+                href={`/tutoriels/${item.id}`}
+                date={new Date(item.data.date)}
+                category={item.data.category}
+                tags={item.data.tags}
+                difficulty={item.data.difficulty}
+                duration={item.data.duration}
+                type="tutoriel"
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16 bg-surface-light/50 rounded-xl border border-surface-lighter/50">
+          <p class="text-text-muted">Aucun tutoriel pour le moment. Revenez bientot !</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+    const cards = document.querySelectorAll<HTMLElement>('[data-difficulty]');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+
+        buttons.forEach((b) => {
+          b.classList.remove('bg-emdash', 'text-white', 'border-emdash');
+          b.classList.add('bg-surface-light', 'text-text-muted', 'border-surface-lighter');
+        });
+        btn.classList.remove('bg-surface-light', 'text-text-muted', 'border-surface-lighter');
+        btn.classList.add('bg-emdash', 'text-white', 'border-emdash');
+
+        cards.forEach((card) => {
+          if (filter === 'tous' || card.dataset.difficulty === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</BaseLayout>

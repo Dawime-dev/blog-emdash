@@ -1,0 +1,78 @@
+---
+---
+
+<section class="relative overflow-hidden">
+  <!-- Background pattern -->
+  <div class="absolute inset-0 -z-10">
+    <div class="absolute inset-0 bg-gradient-to-br from-emdash/10 via-surface to-accent/5"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-emdash/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-3xl"></div>
+    <!-- Grid pattern -->
+    <div
+      class="absolute inset-0 opacity-[0.03]"
+      style="background-image: url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f97316' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&quot;);"
+    ></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 bg-emdash/10 border border-emdash/20 text-emdash px-4 py-1.5 rounded-full text-sm font-medium mb-8">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emdash opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emdash"></span>
+        </span>
+        Le CMS open source nouvelle generation
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight mb-6">
+        La communaute francophone
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emdash to-emdash-dark">
+          EmDash
+        </span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
+        EmDash est le nouveau CMS open source cree par Cloudflare, construit sur Astro 6.0.
+        Decouvrez tutoriels, guides et ressources en francais pour maitriser le successeur de WordPress.
+      </p>
+
+      <!-- CTA -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <a
+          href="/articles/emdash-presentation"
+          class="inline-flex items-center gap-2 px-8 py-3.5 bg-emdash hover:bg-emdash-dark text-white font-semibold rounded-xl transition-all duration-200 shadow-lg shadow-emdash/25 hover:shadow-xl hover:shadow-emdash/30 hover:-translate-y-0.5"
+        >
+          Decouvrir EmDash
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+        <a
+          href="/tutoriels/installer-emdash"
+          class="inline-flex items-center gap-2 px-8 py-3.5 bg-surface-light hover:bg-surface-lighter text-text font-semibold rounded-xl border border-surface-lighter hover:border-emdash/30 transition-all duration-200"
+        >
+          Premiers pas
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-lg sm:max-w-2xl mx-auto">
+        <div class="flex flex-col items-center gap-1 p-4 rounded-xl bg-surface-light/50 border border-surface-lighter/50">
+          <span class="text-2xl font-extrabold text-emdash">3000+</span>
+          <span class="text-sm text-text-muted">Stars GitHub</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 p-4 rounded-xl bg-surface-light/50 border border-surface-lighter/50">
+          <span class="text-2xl font-extrabold text-accent-green">MIT</span>
+          <span class="text-sm text-text-muted">Open Source</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 p-4 rounded-xl bg-surface-light/50 border border-surface-lighter/50">
+          <span class="text-2xl font-extrabold text-accent">Serverless</span>
+          <span class="text-sm text-text-muted">Cloudflare Workers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

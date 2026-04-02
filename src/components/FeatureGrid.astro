@@ -1,0 +1,76 @@
+---
+const features = [
+  {
+    emoji: '🔷',
+    title: 'TypeScript natif',
+    description: 'Entierement ecrit en TypeScript avec un typage strict de bout en bout.',
+  },
+  {
+    emoji: '🧩',
+    title: 'Plugins sandboxes',
+    description: 'Systeme de plugins isoles et securises, executes dans des Workers dedies.',
+  },
+  {
+    emoji: '🚀',
+    title: 'Astro 6.0',
+    description: 'Construit sur Astro 6.0 pour des performances maximales et le rendu hybride.',
+  },
+  {
+    emoji: '☁️',
+    title: 'Cloudflare Workers',
+    description: 'Deploiement serverless en edge, latence minimale partout dans le monde.',
+  },
+  {
+    emoji: '📝',
+    title: 'Portable Text',
+    description: 'Format de contenu riche et flexible, independant de tout framework.',
+  },
+  {
+    emoji: '🔐',
+    title: 'Passkeys',
+    description: 'Authentification sans mot de passe avec les Passkeys et WebAuthn.',
+  },
+  {
+    emoji: '🗄️',
+    title: 'D1 + R2',
+    description: 'Base de donnees D1 et stockage R2 de Cloudflare, sans infrastructure a gerer.',
+  },
+  {
+    emoji: '🎨',
+    title: 'Themes flexibles',
+    description: 'Systeme de themes puissant avec support complet des composants Astro.',
+  },
+  {
+    emoji: '🌍',
+    title: 'i18n integre',
+    description: 'Support multilingue natif avec gestion des traductions et des locales.',
+  },
+]
+---
+
+<section class="py-16 bg-surface-light/30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-2xl sm:text-3xl font-bold text-text mb-3">
+        Pourquoi choisir EmDash ?
+      </h2>
+      <p class="text-text-muted max-w-2xl mx-auto">
+        Un CMS moderne qui combine le meilleur de l'ecosysteme web actuel avec la puissance du edge computing.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {features.map((feature) => (
+        <div class="group p-6 rounded-xl bg-surface-light border border-surface-lighter hover:border-emdash/30 transition-all duration-300">
+          <div class="text-3xl mb-3">{feature.emoji}</div>
+          <h3 class="text-lg font-semibold text-text mb-2 group-hover:text-emdash transition-colors">
+            {feature.title}
+          </h3>
+          <p class="text-sm text-text-muted leading-relaxed">
+            {feature.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

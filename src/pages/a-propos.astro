@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="A propos"
+  description="Decouvrez EmDash FR, la communaute francophone dediee au CMS open-source EmDash de Cloudflare."
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Page header -->
+      <div class="mb-16">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-text mb-6">
+          A propos d'EmDash FR
+        </h1>
+        <p class="text-xl text-text-muted leading-relaxed">
+          La ressource francophone de reference pour EmDash, le CMS open-source nouvelle generation de Cloudflare.
+        </p>
+      </div>
+
+      <!-- What is this site -->
+      <div class="prose max-w-none">
+        <div class="bg-surface-light rounded-2xl border border-surface-lighter p-8 mb-10">
+          <h2 class="text-2xl font-bold text-text mb-4 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-emdash/15 flex items-center justify-center text-emdash text-lg">
+              🌐
+            </span>
+            Notre mission
+          </h2>
+          <p class="text-text-muted leading-relaxed mb-4">
+            EmDash FR est la communaute francophone dediee a EmDash. Notre objectif est de rendre ce CMS accessible a tous les developpeurs et createurs de contenu francophones, en proposant des ressources de qualite en francais : tutoriels, guides, tests de themes et plugins, dossiers approfondis et articles d'actualite.
+          </p>
+          <p class="text-text-muted leading-relaxed">
+            Nous croyons qu'un CMS moderne, performant et open-source merite une documentation et une communaute a la hauteur de ses ambitions. C'est pourquoi nous produisons du contenu original, teste et verifie, pour vous accompagner dans votre decouverte et votre maitrise d'EmDash.
+          </p>
+        </div>
+
+        <!-- What is EmDash -->
+        <div class="bg-surface-light rounded-2xl border border-surface-lighter p-8 mb-10">
+          <h2 class="text-2xl font-bold text-text mb-4 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center text-accent text-lg">
+              ⚡
+            </span>
+            Qu'est-ce qu'EmDash ?
+          </h2>
+          <p class="text-text-muted leading-relaxed mb-4">
+            EmDash est un CMS (Content Management System) open-source cree par Matt Kane chez Cloudflare. Construit sur Astro 6.0, il est entierement ecrit en TypeScript et deploye sur Cloudflare Workers pour des performances serverless en edge.
+          </p>
+          <ul class="space-y-3 text-text-muted">
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-emdash mt-2 shrink-0"></span>
+              <span><strong class="text-text">Astro 6.0</strong> comme moteur de rendu pour des performances maximales et le rendu hybride</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-emdash mt-2 shrink-0"></span>
+              <span><strong class="text-text">Cloudflare Workers</strong> pour un deploiement serverless en edge, avec une latence minimale</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-emdash mt-2 shrink-0"></span>
+              <span><strong class="text-text">D1 + R2</strong> pour la base de donnees et le stockage, sans infrastructure a gerer</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-emdash mt-2 shrink-0"></span>
+              <span><strong class="text-text">Portable Text</strong> comme format de contenu riche et flexible</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-emdash mt-2 shrink-0"></span>
+              <span><strong class="text-text">Plugins sandboxes</strong> pour un ecosysteme extensible et securise</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-emdash mt-2 shrink-0"></span>
+              <span><strong class="text-text">Passkeys</strong> pour une authentification sans mot de passe</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Team -->
+        <div class="bg-surface-light rounded-2xl border border-surface-lighter p-8 mb-10">
+          <h2 class="text-2xl font-bold text-text mb-4 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-purple-500/15 flex items-center justify-center text-purple-400 text-lg">
+              👥
+            </span>
+            L'equipe
+          </h2>
+          <p class="text-text-muted leading-relaxed mb-6">
+            EmDash FR est un projet communautaire anime par des passionnes du web francophone. Nous sommes des developpeurs, des redacteurs et des testeurs qui partagent une vision commune : rendre EmDash accessible a tous.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-surface border border-surface-lighter">
+              <div class="w-12 h-12 rounded-full bg-emdash/20 flex items-center justify-center text-emdash font-bold text-lg">
+                E
+              </div>
+              <div>
+                <p class="font-semibold text-text">Equipe EmDash FR</p>
+                <p class="text-sm text-text-muted">Redaction & tests</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-surface border border-surface-lighter">
+              <div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-lg">
+                C
+              </div>
+              <div>
+                <p class="font-semibold text-text">Contributeurs</p>
+                <p class="text-sm text-text-muted">Communaute open-source</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contribute -->
+        <div class="bg-surface-light rounded-2xl border border-surface-lighter p-8 mb-10">
+          <h2 class="text-2xl font-bold text-text mb-4 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-accent-green/15 flex items-center justify-center text-accent-green text-lg">
+              🤝
+            </span>
+            Contribuer
+          </h2>
+          <p class="text-text-muted leading-relaxed mb-4">
+            EmDash FR est un projet ouvert et nous accueillons toutes les contributions avec enthousiasme. Voici comment vous pouvez participer :
+          </p>
+          <ul class="space-y-3 text-text-muted">
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent-green mt-2 shrink-0"></span>
+              <span><strong class="text-text">Rediger du contenu</strong> : tutoriels, guides, articles ou tests de themes et plugins</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent-green mt-2 shrink-0"></span>
+              <span><strong class="text-text">Corriger et ameliorer</strong> : signalez les erreurs ou proposez des ameliorations via les issues GitHub</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent-green mt-2 shrink-0"></span>
+              <span><strong class="text-text">Traduire</strong> : aidez-nous a traduire la documentation officielle d'EmDash en francais</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent-green mt-2 shrink-0"></span>
+              <span><strong class="text-text">Partager</strong> : faites connaitre EmDash et EmDash FR autour de vous</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Resources -->
+        <div class="bg-gradient-to-br from-emdash/10 via-surface-light to-accent/5 rounded-2xl border border-surface-lighter p-8">
+          <h2 class="text-2xl font-bold text-text mb-4 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-emdash/15 flex items-center justify-center text-emdash text-lg">
+              🔗
+            </span>
+            Ressources officielles
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a
+              href="https://github.com/emdash-cms/emdash"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-4 p-4 rounded-xl bg-surface/80 border border-surface-lighter hover:border-emdash/40 transition-colors group"
+            >
+              <svg class="w-8 h-8 text-text-muted group-hover:text-emdash transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              <div>
+                <p class="font-semibold text-text group-hover:text-emdash transition-colors">GitHub EmDash</p>
+                <p class="text-sm text-text-muted">Code source et issues</p>
+              </div>
+            </a>
+            <a
+              href="https://emdash.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-4 p-4 rounded-xl bg-surface/80 border border-surface-lighter hover:border-emdash/40 transition-colors group"
+            >
+              <svg class="w-8 h-8 text-text-muted group-hover:text-emdash transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+              </svg>
+              <div>
+                <p class="font-semibold text-text group-hover:text-emdash transition-colors">Site officiel</p>
+                <p class="text-sm text-text-muted">emdash.dev</p>
+              </div>
+            </a>
+            <a
+              href="https://docs.emdash.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-4 p-4 rounded-xl bg-surface/80 border border-surface-lighter hover:border-emdash/40 transition-colors group"
+            >
+              <svg class="w-8 h-8 text-text-muted group-hover:text-emdash transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              <div>
+                <p class="font-semibold text-text group-hover:text-emdash transition-colors">Documentation</p>
+                <p class="text-sm text-text-muted">Docs officielles (anglais)</p>
+              </div>
+            </a>
+            <a
+              href="https://blog.cloudflare.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-4 p-4 rounded-xl bg-surface/80 border border-surface-lighter hover:border-emdash/40 transition-colors group"
+            >
+              <svg class="w-8 h-8 text-text-muted group-hover:text-emdash transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+              </svg>
+              <div>
+                <p class="font-semibold text-text group-hover:text-emdash transition-colors">Blog Cloudflare</p>
+                <p class="text-sm text-text-muted">Annonces officielles</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

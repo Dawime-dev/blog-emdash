@@ -1,0 +1,71 @@
+---
+import ContentCard from './ContentCard.astro'
+
+interface ContentItem {
+  title: string
+  description: string
+  href: string
+  date: Date
+  category: string
+  tags: string[]
+  difficulty?: 'debutant' | 'intermediaire' | 'avance'
+  duration?: string
+  type: 'tutoriel' | 'guide' | 'article' | 'theme' | 'plugin' | 'dossier'
+}
+
+interface Props {
+  title: string
+  description: string
+  href: string
+  items: ContentItem[]
+}
+
+const { title, description, href, items } = Astro.props
+---
+
+<section class="py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-text mb-2">{title}</h2>
+        <p class="text-text-muted">{description}</p>
+      </div>
+      <a
+        href={href}
+        class="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-emdash hover:text-emdash-dark transition-colors shrink-0"
+      >
+        Voir tout
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Cards grid -->
+    {items.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {items.map((item) => (
+          <ContentCard {...item} />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-12 bg-surface-light/50 rounded-xl border border-surface-lighter/50">
+        <p class="text-text-muted">Aucun contenu pour le moment. Revenez bientot !</p>
+      </div>
+    )}
+
+    <!-- Mobile "Voir tout" -->
+    <div class="mt-6 text-center sm:hidden">
+      <a
+        href={href}
+        class="inline-flex items-center gap-1.5 text-sm font-medium text-emdash hover:text-emdash-dark transition-colors"
+      >
+        Voir tout
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

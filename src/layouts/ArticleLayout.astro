@@ -1,0 +1,149 @@
+---
+import BaseLayout from './BaseLayout.astro'
+
+interface Props {
+  title: string
+  description: string
+  date: Date
+  author: string
+  category: string
+  tags: string[]
+  difficulty?: 'debutant' | 'intermediaire' | 'avance'
+  duration?: string
+}
+
+const { title, description, date, author, category, tags, difficulty, duration } = Astro.props
+
+const formattedDate = new Intl.DateTimeFormat('fr-FR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(date)
+
+const difficultyColors: Record<string, string> = {
+  debutant: 'bg-accent-green/20 text-accent-green',
+  intermediaire: 'bg-emdash/20 text-emdash',
+  avance: 'bg-red-500/20 text-red-400',
+}
+
+const difficultyLabels: Record<string, string> = {
+  debutant: 'Debutant',
+  intermediaire: 'Intermediaire',
+  avance: 'Avance',
+}
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Hero -->
+    <header class="max-w-4xl mx-auto mb-12">
+      <div class="flex flex-wrap items-center gap-3 mb-4 text-sm">
+        <a
+          href={`/${category.toLowerCase()}`}
+          class="bg-emdash/15 text-emdash px-3 py-1 rounded-full font-medium hover:bg-emdash/25 transition-colors"
+        >
+          {category}
+        </a>
+        {difficulty && (
+          <span class={`px-3 py-1 rounded-full font-medium ${difficultyColors[difficulty]}`}>
+            {difficultyLabels[difficulty]}
+          </span>
+        )}
+        {duration && (
+          <span class="text-text-muted flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {duration}
+          </span>
+        )}
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mb-6">
+        {title}
+      </h1>
+
+      <p class="text-xl text-text-muted mb-6">{description}</p>
+
+      <div class="flex items-center gap-4 text-sm text-text-muted border-t border-surface-lighter pt-6">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-emdash/20 flex items-center justify-center text-emdash font-bold text-sm">
+            {author.charAt(0).toUpperCase()}
+          </div>
+          <span class="font-medium text-text">{author}</span>
+        </div>
+        <span class="text-surface-lighter">|</span>
+        <time datetime={date.toISOString()}>{formattedDate}</time>
+      </div>
+
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-6">
+          {tags.map((tag) => (
+            <span class="text-xs bg-surface-lighter/60 text-text-muted px-2.5 py-1 rounded-full">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- Content + Sidebar -->
+    <div class="flex gap-12 max-w-7xl mx-auto">
+      <!-- Main content -->
+      <div class="flex-1 min-w-0 max-w-4xl">
+        <div class="prose">
+          <slot />
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="hidden xl:block w-64 shrink-0">
+        <div class="sticky top-24">
+          <nav class="bg-surface-light rounded-xl p-5 border border-surface-lighter">
+            <h3 class="text-sm font-semibold text-text uppercase tracking-wider mb-4">
+              Table des matieres
+            </h3>
+            <ul class="space-y-2 text-sm" id="toc"></ul>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </article>
+<script>
+  const toc = document.getElementById('toc');
+  const prose = document.querySelector('.prose');
+  if (toc && prose) {
+    const headings = prose.querySelectorAll('h2, h3');
+    headings.forEach((heading, i) => {
+      if (!heading.id) heading.id = `heading-${i}`;
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = `#${heading.id}`;
+      a.textContent = heading.textContent;
+      a.className = 'text-text-muted hover:text-emdash transition-colors block';
+      if (heading.tagName === 'H3') {
+        li.className = 'pl-3 border-l border-surface-lighter';
+      }
+      li.appendChild(a);
+      toc.appendChild(li);
+    });
+
+    // Highlight active heading on scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const link = toc.querySelector(`a[href="#${entry.target.id}"]`);
+          if (link) {
+            if (entry.isIntersecting) {
+              toc.querySelectorAll('a').forEach((a) => a.classList.remove('text-emdash', 'font-medium'));
+              link.classList.add('text-emdash', 'font-medium');
+            }
+          }
+        });
+      },
+      { rootMargin: '-80px 0px -60% 0px' }
+    );
+    headings.forEach((h) => observer.observe(h));
+  }
+</script>
+</BaseLayout>
