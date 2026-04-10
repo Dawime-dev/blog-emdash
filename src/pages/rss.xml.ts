@@ -27,7 +27,7 @@ export async function GET(context: APIContext) {
       title: item.data.title,
       description: item.data.description,
       pubDate: new Date(item.data.date),
-      link: `/${item.section}/${item.id}/`,
+      link: `/${item.section}/${item.id}`,
     })),
     customData: '<language>fr-FR</language>',
   });
