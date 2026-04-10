@@ -10,7 +10,7 @@ import node from '@astrojs/node';
 export default defineConfig({
   site: 'https://emdash.fr',
   output: 'server',
-  trailingSlash: 'ignore',
+  trailingSlash: 'never',
 
   vite: {
     plugins: [tailwindcss()]
